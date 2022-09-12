@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeDevelopment_Lesson5", "SafeDevelopment_Lesson5\SafeDevelopment_Lesson5.csproj", "{B43C5A30-4ECD-45BC-90BD-CB53FC245D02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateGenerator", "SafeDevelopment_Lesson5\CertificateGenerator.csproj", "{B43C5A30-4ECD-45BC-90BD-CB53FC245D02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
