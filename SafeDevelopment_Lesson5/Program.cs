@@ -12,7 +12,7 @@ namespace SafeDevelopment_Lesson5
         {
             while (true)
             {
-                Console.WriteLine("~~ Центр генерации сертификатов ~~~\n");
+                Console.WriteLine("*/*/*/*/*/* Генерация сертификатов */*/*/*/*/*/\n");
                 Console.WriteLine("1. Создать корневой сертификат");
                 Console.WriteLine("2. Создать сертификат");
                 Console.Write("Выберите подпрограмму (0 - завершение работы приложения): ");
@@ -24,9 +24,37 @@ namespace SafeDevelopment_Lesson5
                             Console.WriteLine("Завершение работы приложения.");
                             Console.ReadKey();
                             return;
-                        case 1:                            
+                        case 1:
+                            CertificateConfiguration certificateConfiguration = new CertificateConfiguration
+                            {
+                                CertName = "ООО СКРЗ",
+                                OutFolder = @"D:\\certificates",
+                                Password = "12345678",
+                                CertDuration = 30
+                            };
+                            CertificateGenerationProvider certificateGenerationProvider = new CertificateGenerationProvider();
+                            certificateGenerationProvider.GenerateRootCertificate(certificateConfiguration);
+                            Console.WriteLine("Успех!");
                             break;
-                        case 2:                            
+                        case 2:
+                            int counter = 0;
+                            CertificateExplorerProvider certificateExplorerProvider = new CertificateExplorerProvider(true);
+                            certificateExplorerProvider.LoadCertificates();
+                            foreach (var certificate in certificateExplorerProvider.Certificates)
+                            {
+                                Console.WriteLine($"{counter++} >>> {certificate}");
+                            }
+                            Console.Write("Укажите номер корневого сертификата: ");
+                            CertificateConfiguration addCertificateConfiguration = new CertificateConfiguration
+                            {
+                                RootCertificate = certificateExplorerProvider.Certificates[int.Parse(Console.ReadLine())].Certificate,
+                                CertName = "R&D Department",
+                                OutFolder = @"D:\\certificates",
+                                Password = "12345678",
+                            };
+                            CertificateGenerationProvider certificateGenerationProvider2 = new CertificateGenerationProvider();
+                            certificateGenerationProvider2.GenerateCertificate(addCertificateConfiguration);
+                            Console.WriteLine("Успех!");
                             break;
                         default:
                             Console.WriteLine("Некорректный номер подпрограммы. Пожалуйста, повторите ввод.");
