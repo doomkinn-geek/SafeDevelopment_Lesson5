@@ -36,7 +36,25 @@ namespace SafeDevelopment_Lesson5
                             certificateGenerationProvider.GenerateRootCertificate(certificateConfiguration);
                             Console.WriteLine("Успех!");
                             break;
-                        case 2:                            
+                        case 2:
+                            int counter = 0;
+                            CertificateExplorerProvider certificateExplorerProvider = new CertificateExplorerProvider(true);
+                            certificateExplorerProvider.LoadCertificates();
+                            foreach (var certificate in certificateExplorerProvider.Certificates)
+                            {
+                                Console.WriteLine($"{counter++} >>> {certificate}");
+                            }
+                            Console.Write("Укажите номер корневого сертификата: ");
+                            CertificateConfiguration addCertificateConfiguration = new CertificateConfiguration
+                            {
+                                RootCertificate = certificateExplorerProvider.Certificates[int.Parse(Console.ReadLine())].Certificate,
+                                CertName = "R&D Department",
+                                OutFolder = @"D:\\certificates",
+                                Password = "12345678",
+                            };
+                            CertificateGenerationProvider certificateGenerationProvider2 = new CertificateGenerationProvider();
+                            certificateGenerationProvider2.GenerateCertificate(addCertificateConfiguration);
+                            Console.WriteLine("Успех!");
                             break;
                         default:
                             Console.WriteLine("Некорректный номер подпрограммы. Пожалуйста, повторите ввод.");
